@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18-may-2020 19:16:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="bdfinal" name="model.User" optimistic-lock="version" table="user">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="username" type="string">
+      <column length="10" name="username" not-null="true" unique="true"/>
+    </property>
+    <property name="password" type="string">
+      <column length="10" name="password" not-null="true"/>
+    </property>
+    <property name="name" type="string">
+      <column length="20" name="name" not-null="true"/>
+    </property>
+    <property name="lastname" type="string">
+      <column length="20" name="lastname" not-null="true"/>
+    </property>
+    <property name="birthdate" type="date">
+            <column name="birthdate" length="10" />
+    </property>
+    <property name="mail" type="string">
+      <column length="30" name="mail" not-null="true" unique="true"/>
+    </property>
+    <property name="photourl" type="string">
+      <column length="100" name="photourl" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="trequests" table="trequest">
+      <key>
+        <column name="dest_user" not-null="true"/>
+      </key>
+      <one-to-many class="model.Trequest"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="frequestsForDestUser" table="frequest">
+      <key>
+        <column name="dest_user" not-null="true"/>
+      </key>
+      <one-to-many class="model.Frequest"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="frequestsForOrigUser" table="frequest">
+      <key>
+        <column name="orig_user" not-null="true"/>
+      </key>
+      <one-to-many class="model.Frequest"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="messages" table="message">
+      <key>
+        <column name="id_user" not-null="true"/>
+      </key>
+      <one-to-many class="model.Message"/>
+    </set>
+    <set cascade="all" fetch="select" name="friends" table="friend">
+      <key column="id_user1"/>
+      <many-to-many class="model.User" column="id_user2"/>
+    </set>
+    <set cascade="all" fetch="select" name="topics" table="user_topic">
+      <key column="id_user"/>
+      <many-to-many class="model.Topic" column="id_topic"/>
+    </set>
+  </class>
+</hibernate-mapping>

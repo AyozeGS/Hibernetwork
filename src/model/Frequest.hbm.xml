@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18-may-2020 19:16:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="bdfinal" name="model.Frequest" optimistic-lock="version" table="frequest">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="model.User" fetch="select" name="userByDestUser">
+      <column name="dest_user" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="model.User" fetch="select" name="userByOrigUser">
+      <column name="orig_user" not-null="true"/>
+    </many-to-one>
+  </class>
+</hibernate-mapping>

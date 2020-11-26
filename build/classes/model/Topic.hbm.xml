@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18-may-2020 19:16:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="bdfinal" name="model.Topic" optimistic-lock="version" table="topic">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="title" type="string">
+      <column length="25" name="title" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="trequests" table="trequest">
+      <key>
+        <column name="id_topic" not-null="true"/>
+      </key>
+      <one-to-many class="model.Trequest"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="messages" table="message">
+      <key>
+        <column name="id_topic" not-null="true"/>
+      </key>
+      <one-to-many class="model.Message"/>
+    </set>
+    <set cascade="all" fetch="select" name="users" table="user_topic">
+      <key column="id_topic"/>
+      <many-to-many class="model.User" column="id_user"/>
+    </set>
+  </class>
+</hibernate-mapping>
