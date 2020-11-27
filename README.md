@@ -1,4 +1,4 @@
-Simple Social network con Java Swing + Hibernate.
+Simple social network con Java Swing + Hibernate.
 
 ![Alt text](screenshots/login.png?raw=true "Login")
 
